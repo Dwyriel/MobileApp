@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "appmobile1-1a8ed": {
+      "hosting": {
+        "app": [
+          "appmobile1-1a8ed"
+        ]
+      }
+    }
+  }
+}
