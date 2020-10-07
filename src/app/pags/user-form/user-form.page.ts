@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/classes/user';
+import { Validation } from 'src/app/classes/validation';
 
 
 @Component({
@@ -13,16 +14,18 @@ export class UserFormPage implements OnInit {
   public user: User = new User;
   public confirm: string = "";
   public minlength = 2; //chance later
+  public validator: Validation = new Validation();
 
   constructor(public alertController: AlertController, private userService: UserService) { }
 
   ngOnInit() {
   }
 
-  OnClick(form) {
+  OnClick(form) {/*
+    console.log(this.validator.isValEmail(this.user.email));
     console.log(this.confirm);
     console.log(this.user);
-    console.log(form);
+    console.log(form);*/
     if (form.valid){
       this.userService.add(this.user).then(
         ans=>{

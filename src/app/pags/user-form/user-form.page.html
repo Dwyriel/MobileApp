@@ -11,8 +11,8 @@
       <ion-input type="text" name="user-name" [(ngModel)]=user.name required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" name="user-email" [(ngModel)]=user.email required></ion-input>
+      <ion-label position="floating">Email <ion-text color="danger" *ngIf="!validator.isValEmail(em.value) && em.dirty"><b>Email invalid</b> </ion-text></ion-label>
+      <ion-input type="email" name="user-email" [(ngModel)]=user.email #em="ngModel" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Password <ion-text color="danger" *ngIf="ps.invalid && ps.dirty"><b>Password invalid</b> </ion-text> </ion-label>
@@ -28,7 +28,7 @@
     </ion-item>
 
       <!-- install bootstrap? :) -->
-      <ion-button expand="block" size="large" [disabled]="form.invalid || (cf.value != ps.value)" type="submit">Send</ion-button>
+      <ion-button expand="block" size="large" [disabled]="form.invalid || (cf.value != ps.value || !validator.isValEmail(em.value))" type="submit">Send</ion-button>
       <ion-button expand="block" size="large" type="reset">Cancel</ion-button>
   </form>
 </ion-content>
