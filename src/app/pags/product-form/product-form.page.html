@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Register product</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="OnClick(form)" #form="ngForm">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" name="prod-name" [(ngModel)]=product.name required clearInput pattern="[*-_0-9a-zA-Z ]*"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label >Price </ion-label>
+      <ion-input type="number" name="prod-price" [(ngModel)]=product.price required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Category </ion-label>
+      <ion-input type="text" name="prod-category" [(ngModel)]=product.category required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Description </ion-label>
+      <ion-input type="text" name="prod-description" [(ngModel)]=product.description clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Specs </ion-label>
+      <ion-input type="text" name="prod-specs" [(ngModel)]=product.specs required clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Stock </ion-label>
+      <ion-input type="number" name="prod-stock" [(ngModel)]=product.stock value="0"></ion-input>
+    </ion-item>
+
+      <!-- install bootstrap? :) -->
+      <ion-button expand="block" size="large" [disabled]="form.invalid" type="submit">Register</ion-button>
+      <ion-button expand="block" size="large" type="reset">Cancel</ion-button>
+  </form>
+</ion-content>
