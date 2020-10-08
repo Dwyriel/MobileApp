@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { cats, Product } from 'src/app/classes/product';
+import { Categories, Product } from 'src/app/classes/product';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductFormPage implements OnInit {
   public product: Product = new Product();
-  cats = cats;
+  cats = Categories;
 
   constructor(private productService: ProductService, public alertController: AlertController) { }
 
