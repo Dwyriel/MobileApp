@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductFormPage implements OnInit {
   public product: Product = new Product();
+  cats = cats;
 
   constructor(private productService: ProductService, public alertController: AlertController) { }
 
@@ -19,10 +20,10 @@ export class ProductFormPage implements OnInit {
   public OnClick(form) {
     console.log(this.product);
 
-    /*if (form.valid){
+    if (form.valid){
       this.productService.add(this.product).then(
         ans=>{
-          console.log("Cadastrado!", ans);
+          console.log("Registrado!", ans);
           this.presentAlert("Aviso", "Produto registrado!");
         },
         err=>{
@@ -30,7 +31,7 @@ export class ProductFormPage implements OnInit {
           this.presentAlert("Erro:", "Produto não registrado!");
         }
       )
-    }*/
+    }
   }
 
   async presentAlert(type: string, text: string) { //repeating code, might be a good idea to turn into a class (static if posible)
@@ -43,20 +44,7 @@ export class ProductFormPage implements OnInit {
     await alert.present();
   }
 
-  onChange(event) {
-    console.log(this.product);
-    var int: number = parseInt(event.target.value);
-    this.product.category = int;
-    console.log(cats[int]);
-    console.log(this.product);
-    console.log(this.product.category.toString());
-  }
-
   public OnClick2() {
     console.log(this.product);
-    let categs: cats = cats.Roupas;
-    console.log(categs.toFixed());
-    console.log(cats[3]);
-    console.log(cats.Roupas);
   }
 }
