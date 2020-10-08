@@ -15,8 +15,13 @@
       <ion-input type="number" name="prod-price" [(ngModel)]=product.price required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Category </ion-label>
-      <ion-input type="text" name="prod-category" [(ngModel)]=product.category required></ion-input>
+      <ion-label>Category2</ion-label>
+      <ion-select name="prod-category2" [interfaceOptions]="customPopoverOptions" interface="popover" [(ngModel)]=product.category placeholder="Select One" required>
+        <ion-select-option [value]="cats.Casa">Casa</ion-select-option>
+        <ion-select-option [value]="cats.Eletronicos">Eletronicos</ion-select-option>
+        <ion-select-option [value]="cats.Eletrodomesticos">Eletrodomesticos</ion-select-option>
+        <ion-select-option [value]="cats.Roupas">Roupas</ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Description </ion-label>
@@ -35,4 +40,5 @@
       <ion-button expand="block" size="large" [disabled]="form.invalid" type="submit">Register</ion-button>
       <ion-button expand="block" size="large" type="reset">Cancel</ion-button>
   </form>
+  <ion-button expand="block" size="large" (click)="OnClick2()">try</ion-button>
 </ion-content>

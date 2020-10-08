@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Product } from 'src/app/classes/product';
+import { cats, Product } from 'src/app/classes/product';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductFormPage implements OnInit {
   public product: Product = new Product();
+  cats = cats;
 
   constructor(private productService: ProductService, public alertController: AlertController) { }
 
@@ -22,7 +23,7 @@ export class ProductFormPage implements OnInit {
     if (form.valid){
       this.productService.add(this.product).then(
         ans=>{
-          console.log("Cadastrado!", ans);
+          console.log("Registrado!", ans);
           this.presentAlert("Aviso", "Produto registrado!");
         },
         err=>{
@@ -41,5 +42,9 @@ export class ProductFormPage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
+  }
+
+  public OnClick2() {
+    console.log(this.product);
   }
 }
