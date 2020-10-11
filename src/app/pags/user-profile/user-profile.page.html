@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{user.name}}'s profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-text>{{user.name}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>E-mail</ion-label>
+      <ion-text>{{user.email}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tel</ion-label>
+      <ion-text>{{user.tel}}</ion-text>
+    </ion-item>
+  </ion-list>
+</ion-content>

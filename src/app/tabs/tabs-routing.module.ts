@@ -20,16 +20,12 @@ const routes: Routes = [
         loadChildren: () => import('../pags/user-list/user-list.module').then( m => m.UserListPageModule)
       },
       {
+        path: 'user-profile/:id',
+        loadChildren: () => import('../pags/user-profile/user-profile.module').then( m => m.UserProfilePageModule)
+      },
+      {
         path: 'product-form',
         loadChildren: () => import('../pags/product-form/product-form.module').then( m => m.ProductFormPageModule)
-      },
-      {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
-      },
-      {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
         path: '',
