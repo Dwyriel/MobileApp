@@ -28,6 +28,14 @@ const routes: Routes = [
         loadChildren: () => import('../pags/product-form/product-form.module').then( m => m.ProductFormPageModule)
       },
       {
+        path: 'product-list',
+        loadChildren: () => import('../pags/product-list/product-list.module').then( m => m.ProductListPageModule)
+      },
+      {
+        path: 'product/:id',
+        loadChildren: () => import('../product/product.module').then( m => m.ProductPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Products</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+
+    <ion-item lines="inset" *ngFor="let product of products" routerLink="/tabs/product/{{product.id}}">
+      <ion-img src="#placeholder" height="" [alt]="//product.name"></ion-img>
+      <ion-label>
+        <h2>{{product.name}}</h2>
+        <h3>{{product.price | currency:'BRL' }}</h3>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{product.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-img src="#placeholder" height="" [alt]="//product.name"></ion-img>
+  <p>
+    <ion-text>{{product.name}}</ion-text>
+  </p>
+  <p>
+    <ion-text>{{product.price | currency:'BRL'}}</ion-text>
+  </p>
+  <ion-button expand="block" size="medium" (click)="clickBuy()">Buy</ion-button>
+  <br>Description:
+  <p>
+    <ion-text>{{product.description}}</ion-text>
+  </p>
+  <br>Specs:
+  <ion-list>
+    <ion-text>{{product.specs}}</ion-text>
+  </ion-list>
+  <!--fix later-->
+</ion-content>
