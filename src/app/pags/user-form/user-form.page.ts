@@ -65,9 +65,9 @@ export class UserFormPage implements OnInit, OnDestroy {
     }
   }
 
-  async successSubmit(title: string, description: string, navigateTo: string) {
+  successSubmit(title: string, description: string, navigateTo: string) {
     this.popup.presentAlert(title, description);
-    await this.popup.dismissLoading(); //await seems to have fixed the weird error
-    this.router.navigate([navigateTo]);
+    this.popup.dismissLoading(); 
+    setTimeout(() => this.router.navigate([navigateTo]), 300);//setTimeout seems to have fixed the weird error with dismissLoading, should try to find a better solution later
   }
 }
