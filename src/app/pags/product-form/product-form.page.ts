@@ -20,13 +20,13 @@ export class ProductFormPage implements OnInit {
   public OnClick(form) {
     console.log(this.product);
 
-    if (form.valid){
+    if (form.valid) {
       this.productService.add(this.product).then(
-        ans=>{
+        ans => {
           console.log("Registrado!", ans);
           this.presentAlert("Aviso", "Produto registrado!");
         },
-        err=>{
+        err => {
           console.error("Erro:", err);
           this.presentAlert("Erro:", "Produto não registrado!");
         }
@@ -42,9 +42,5 @@ export class ProductFormPage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
-  }
-
-  public OnClick2() {
-    console.log(this.product);
   }
 }

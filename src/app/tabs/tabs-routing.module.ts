@@ -12,28 +12,28 @@ const routes: Routes = [
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
       {
-        path: 'user-form',
-        loadChildren: () => import('../pags/user-form/user-form.module').then( m => m.UserFormPageModule)
+        path: 'newUser',
+        loadChildren: () => import('../pags/user-form/user-form.module').then(m => m.UserFormPageModule)
       },
       {
-        path: 'user-list',
-        loadChildren: () => import('../pags/user-list/user-list.module').then( m => m.UserListPageModule)
+        path: 'users',
+        loadChildren: () => import('../pags/user-list/user-list.module').then(m => m.UserListPageModule)
       },
       {
-        path: 'user-profile/:id',
-        loadChildren: () => import('../pags/user-profile/user-profile.module').then( m => m.UserProfilePageModule)
+        path: 'user/:id',
+        loadChildren: () => import('../pags/user-profile/user-profile.module').then(m => m.UserProfilePageModule)
       },
       {
-        path: 'product-form',
-        loadChildren: () => import('../pags/product-form/product-form.module').then( m => m.ProductFormPageModule)
+        path: 'newProduct',
+        loadChildren: () => import('../pags/product-form/product-form.module').then(m => m.ProductFormPageModule)
       },
       {
-        path: 'product-list',
-        loadChildren: () => import('../pags/product-list/product-list.module').then( m => m.ProductListPageModule)
+        path: 'products',
+        loadChildren: () => import('../pags/product-list/product-list.module').then(m => m.ProductListPageModule)
       },
       {
         path: 'product/:id',
-        loadChildren: () => import('../product/product.module').then( m => m.ProductPageModule)
+        loadChildren: () => import('../product/product.module').then(m => m.ProductPageModule)
       },
       {
         path: '',
@@ -53,4 +53,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

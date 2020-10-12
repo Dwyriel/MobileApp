@@ -15,6 +15,7 @@ export class UserProfilePage implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private userServ: UserService) { }
 
   ngOnInit() {
+    this.user.name = "User";
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if (this.id) {
       {
