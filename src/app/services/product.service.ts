@@ -11,7 +11,7 @@ export class ProductService {
 
   constructor(private fireDB: AngularFirestore) { }
 
-  add(product: Product){
+  add(product: Product) {
     return this.fireDB.collection<Product>(this.colProduct).add({
       name: product.name,
       price: product.price,
@@ -33,5 +33,13 @@ export class ProductService {
 
   get(id: string) {
     return this.fireDB.collection(this.colProduct).doc<Product>(id).valueChanges();
+  }
+
+  update(user: Product, id: string) {
+    return this.fireDB.collection(this.colProduct).doc(id).update(user);
+  }
+
+  remove(id: string) {
+    return this.fireDB.collection(this.colProduct).doc(id).delete();
   }
 }

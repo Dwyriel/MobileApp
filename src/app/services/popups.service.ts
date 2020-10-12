@@ -23,9 +23,7 @@ export class PopUpsService {
 
   async presentAlert(title: string, text: string) {
     const alert = await this.alertController.create({
-      cssClass: '',
       header: title,
-      //subHeader: 'Subtitle',
       message: text,
       buttons: ['OK'],
     });
@@ -47,14 +45,14 @@ export class PopUpsService {
           text: 'OK',
           handler: () => {
             alert.dismiss(true);//this is what actually returns what i want, but without the code below it just doesnt work
-            return false;//have no idea why, but this HAS to be false or it's not going to return true(?)
+            return false;//after some time looking it up, returning false means that the alert wont just "vanish", meaning I can get the date through the dismiss 
           }
         }
       ]
     });
     var returned;
     await alert.present();
-    await alert.onDidDismiss().then((data) => { returned = data; console.log(data)});
+    await alert.onDidDismiss().then((data) => { returned = data; console.log(data) });
     return returned.data;
     /*this is the worse code I've ever written, i don't even know how I made it work, took way too many hours just to implement this
     this should be a reminder to not ever do something like this again, and/or look up stuff before commiting to it*/

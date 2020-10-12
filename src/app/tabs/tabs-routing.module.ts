@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: () => import('../pags/user-form/user-form.module').then(m => m.UserFormPageModule)
       },
       {
+        path: 'newUser/:id',
+        loadChildren: () => import('../pags/user-form/user-form.module').then(m => m.UserFormPageModule)
+      },
+      {
         path: 'users',
         loadChildren: () => import('../pags/user-list/user-list.module').then(m => m.UserListPageModule)
       },

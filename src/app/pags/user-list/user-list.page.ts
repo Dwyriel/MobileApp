@@ -31,14 +31,14 @@ export class UserListPage implements OnInit {
           },
           err => {
             this.popup.dismissLoading()
-            console.log("Erro: ", err);
+            console.log("Error: ", err);
           }
         )
       }
     });
   }
 
-  async deleteEntry2(id) {// I'll leave it here for reference / ignore this
+  async deleteEntry2(id) {// I'll leave it here for future reference | ignore this
     var code = '({Run: (data:string): string => {console.log("Hello"); return Promise.resolve("Worked");}})';
     this.popup.confirmationAlertCode("Confirm!", "Do you really want to delete this user?", code);
   }
