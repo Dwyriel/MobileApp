@@ -30,37 +30,35 @@ export class ProductFormPage implements OnInit, OnDestroy {
   }
 
   public OnClick(form) {
-    console.log(this.product);
-
     if (form.valid) {
       this.popup.presentLoading();
       if (!this.id) {
         this.productService.add(this.product).then(ans => {
           form.reset();
-          this.successSubmit("Heads up", "Product registered!", "");
+          this.successfulSubmit("Heads up", "Product registered!", "");
         },
           err => {
-            this.failSubmit("Error", "Product not registered!", err);
+            this.failedSubmit("Error", "Product not registered!", err);
           });
       } else {
         this.productService.update(this.product, this.id).then(ans => {
-          this.successSubmit("Heads up", "Product was updated!", "/tabs/product/" + this.id);
+          this.successfulSubmit("Heads up", "Product was updated!", "/tabs/product/" + this.id);
         },
           err => {
-            this.failSubmit("Error", "Product was not updated!", err);
+            this.failedSubmit("Error", "Product was not updated!", err);
           });
       }
     }
   }
 
-  successSubmit(title: string, description: string, navigateTo: string) {
+  successfulSubmit(title: string, description: string, navigateTo: string) {
     this.id = null;
     this.popup.presentAlert(title, description);
-    this.popup.dismissLoading();
+    setTimeout(() => this.popup.dismissLoading(), 200);
     setTimeout(() => this.router.navigate([navigateTo]), 300);//setTimeout seems to have fixed the weird error with dismissLoading, should try to find a better solution later
   }
 
-  failSubmit(title: string, description: string, err) {
+  failedSubmit(title: string, description: string, err) {
     console.log(err);
     this.popup.presentAlert(title, description);
     this.popup.dismissLoading();

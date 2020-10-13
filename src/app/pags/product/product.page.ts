@@ -16,10 +16,15 @@ export class ProductPage implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private prodServ: ProductService, private router: Router, private popup: PopUpsService) { }
 
   ngOnInit() {
+    this.popup.presentLoading();
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if (this.id) {
       {
         this.prodServ.get(this.id).subscribe(res => { this.product = res });
+        setTimeout(() => {
+          console.log(this.product.name);//Will leave it here for reference. when deleting an entry errors occur saying that the product.name is undefined, couldn't find a workaround, but it doesn't affect anything other than messages on the console
+          this.popup.dismissLoading()
+        }, 300);//errors every time without the timeout
       }
     } else {
       this.router.navigate(["/tabs/products/"]);
@@ -40,7 +45,7 @@ export class ProductPage implements OnInit {
         this.popup.presentLoading();
         this.prodServ.delete(id).then(
           () => {
-            this.popup.dismissLoading()
+            setTimeout(() => this.popup.dismissLoading(), 200);
             this.router.navigate(["/tabs/products"]);
           },
           err => {

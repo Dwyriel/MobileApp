@@ -52,7 +52,7 @@ export class PopUpsService {
     });
     var returned;
     await alert.present();
-    await alert.onDidDismiss().then((data) => { returned = data; console.log(data) });
+    await alert.onDidDismiss().then((data) => { returned = data; });
     return returned.data;
     /*this is the worse code I've ever written, i don't even know how I made it work, took way too many hours just to implement this
     this should be a reminder to not ever do something like this again, and/or look up stuff before commiting to it*/

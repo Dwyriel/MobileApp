@@ -17,7 +17,11 @@ export class UserListPage implements OnInit {
   constructor(private userServ: UserService, private router: Router, private popup: PopUpsService, public alertController: AlertController) { }
 
   ngOnInit() {
-    this.userServ.getAll().subscribe(res => { this.users = res });
+    this.popup.presentLoading();
+    this.userServ.getAll().subscribe(res => {
+      this.users = res;
+      setTimeout(() => this.popup.dismissLoading(), 200);
+    });
   }
 
   async deleteEntry(id) {
@@ -26,7 +30,7 @@ export class UserListPage implements OnInit {
         this.popup.presentLoading();
         this.userServ.delete(id).then(
           () => {
-            this.popup.dismissLoading()
+            setTimeout(() => this.popup.dismissLoading(), 50);
             this.router.navigate([""]);
           },
           err => {

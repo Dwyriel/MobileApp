@@ -40,32 +40,32 @@ export class UserFormPage implements OnInit, OnDestroy {
       if (!this.id) {
         this.userService.add(this.user).then(ans => {
           form.reset();
-          this.successSubmit("Heads up", "User was registered!", "");
+          this.successfulSubmit("Heads up", "User was registered!", "");
         },
           err => {
-            this.failSubmit("Error", "User was not registered!", err);
+            this.failedSubmit("Error", "User was not registered!", err);
           });
       } else {
         this.userService.update(this.user, this.id).then(awn => {
           form.reset();
-          this.successSubmit("Heads up", "User was updated!", "/tabs/user/" + this.id);
+          this.successfulSubmit("Heads up", "User was updated!", "/tabs/user/" + this.id);
         }, err => {
-          this.failSubmit("Error", "User was not updated!", err);
+          this.failedSubmit("Error", "User was not updated!", err);
         });
       }
       //this.popup.dismissLoading(); could not use only one dismiss, was just giving me errors even being on the same scope, had to leave multiple dismisses throughout the code
     }
   }
 
-  successSubmit(title: string, description: string, navigateTo: string) {
+  successfulSubmit(title: string, description: string, navigateTo: string) {
     this.id = null;
     this.user = new User();
     this.popup.presentAlert(title, description);
-    this.popup.dismissLoading();
+    setTimeout(() => this.popup.dismissLoading(), 200);
     setTimeout(() => this.router.navigate([navigateTo]), 300);//setTimeout seems to have fixed the weird error with dismissLoading, should try to find a better solution later
   }
 
-  failSubmit(title: string, description: string, err) {
+  failedSubmit(title: string, description: string, err) {
     console.log(err);
     this.popup.presentAlert(title, description);
     this.popup.dismissLoading();
