@@ -17,10 +17,20 @@ export class UserListPage implements OnInit {
   constructor(private userServ: UserService, private router: Router, private popup: PopUpsService, public alertController: AlertController) { }
 
   ngOnInit() {
+    this.load();
+  }
+
+  RefreshContent(event) {
+    this.load(event);
+  }
+
+  load(event?) {
     this.popup.presentLoading();
     this.userServ.getAll().subscribe(res => {
       this.users = res;
       setTimeout(() => this.popup.dismissLoading(), 200);
+      if (event)
+        event.target.complete();
     });
   }
 

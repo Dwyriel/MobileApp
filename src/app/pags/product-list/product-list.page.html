@@ -1,12 +1,16 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="false">
   <ion-toolbar>
     <ion-title>Products</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
+  <ion-refresher slot="fixed" (ionRefresh)="RefreshContent($event)">
+    <ion-refresher-content pullingIcon="bubbles" refreshingSpinner="bubbles">
+    </ion-refresher-content>
+  </ion-refresher>
 
+  <ion-list>
     <ion-item lines="inset" *ngFor="let product of products" routerLink="/tabs/product/{{product.id}}">
       <ion-img src="#placeholder" height="" [alt]="//product.name"></ion-img>
       <ion-label>
@@ -14,8 +18,8 @@
         <h3>{{product.price | currency:'BRL' }}</h3>
       </ion-label>
     </ion-item>
-
   </ion-list>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="/tabs/productForm">
       <ion-icon name="add"></ion-icon>
