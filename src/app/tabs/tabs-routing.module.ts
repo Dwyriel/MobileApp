@@ -12,11 +12,11 @@ const routes: Routes = [
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
       {
-        path: 'newUser',
+        path: 'userForm',
         loadChildren: () => import('../pags/user-form/user-form.module').then(m => m.UserFormPageModule)
       },
       {
-        path: 'newUser/:id',
+        path: 'userForm/:id',
         loadChildren: () => import('../pags/user-form/user-form.module').then(m => m.UserFormPageModule)
       },
       {
@@ -28,7 +28,15 @@ const routes: Routes = [
         loadChildren: () => import('../pags/user-profile/user-profile.module').then(m => m.UserProfilePageModule)
       },
       {
-        path: 'newProduct',
+        path: 'user',
+        loadChildren: () => import('../pags/user-profile/user-profile.module').then(m => m.UserProfilePageModule)
+      },
+      {
+        path: 'productForm',
+        loadChildren: () => import('../pags/product-form/product-form.module').then(m => m.ProductFormPageModule)
+      },
+      {
+        path: 'productForm/:id',
         loadChildren: () => import('../pags/product-form/product-form.module').then(m => m.ProductFormPageModule)
       },
       {
@@ -36,8 +44,12 @@ const routes: Routes = [
         loadChildren: () => import('../pags/product-list/product-list.module').then(m => m.ProductListPageModule)
       },
       {
+        path: 'product',
+        loadChildren: () => import('../pags/product/product.module').then(m => m.ProductPageModule)
+      },
+      {
         path: 'product/:id',
-        loadChildren: () => import('../product/product.module').then(m => m.ProductPageModule)
+        loadChildren: () => import('../pags/product/product.module').then(m => m.ProductPageModule)
       },
       {
         path: '',

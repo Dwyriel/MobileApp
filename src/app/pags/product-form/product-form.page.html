@@ -16,9 +16,9 @@
       <ion-input type="number" name="prod-price" [(ngModel)]=product.price required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Category2</ion-label>
-      <ion-select name="prod-category2" [interfaceOptions]="customPopoverOptions" interface="popover"
-        [(ngModel)]=product.category placeholder="Select One" required>
+      <ion-label>Category</ion-label>
+      <ion-select name="prod-category" [interfaceOptions]="customPopoverOptions" interface="popover"
+        [(ngModel)]=product.category placeholder="Select One" required >
         <ion-select-option [value]="cats.Casa">Casa</ion-select-option>
         <ion-select-option [value]="cats.Eletronicos">Eletronicos</ion-select-option>
         <ion-select-option [value]="cats.Eletrodomesticos">Eletrodomesticos</ion-select-option>
@@ -39,7 +39,12 @@
     </ion-item>
 
     <!-- install bootstrap? :) -->
-    <ion-button expand="block" size="large" [disabled]="form.invalid" type="submit">Register</ion-button>
-    <ion-button expand="block" size="large" type="reset">Cancel</ion-button>
+    <div *ngIf="!id">
+      <ion-button expand="block" size="large" [disabled]="form.invalid" type="submit">Register</ion-button>
+      <ion-button expand="block" size="large" type="reset">Cancel</ion-button>
+    </div>
+    <div *ngIf="id">
+      <ion-button expand="block" size="large" [disabled]="form.invalid" type="submit">Update</ion-button>
+    </div>
   </form>
 </ion-content>

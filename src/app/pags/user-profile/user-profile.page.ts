@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/classes/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -12,7 +12,7 @@ export class UserProfilePage implements OnInit {
   public id: string = null;
   public user: User = new User();
 
-  constructor(private activatedRoute: ActivatedRoute, private userServ: UserService) { }
+  constructor(private activatedRoute: ActivatedRoute, private userServ: UserService, private router: Router) { }
 
   ngOnInit() {
     this.user.name = "User";
@@ -21,6 +21,8 @@ export class UserProfilePage implements OnInit {
       {
         this.userServ.get(this.id).subscribe(res => { this.user = res });
       }
+    } else {
+      this.router.navigate(["/tabs/users"]);
     }
   }
 

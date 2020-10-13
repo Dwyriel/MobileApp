@@ -39,7 +39,7 @@ export class ProductService {
     return this.fireDB.collection(this.colProduct).doc(id).update(user);
   }
 
-  remove(id: string) {
+  delete(id: string) {
     return this.fireDB.collection(this.colProduct).doc(id).delete();
   }
 }

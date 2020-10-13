@@ -24,7 +24,7 @@ export class UserListPage implements OnInit {
     await this.popup.confirmationAlert("Confirm!", "Do you really want to delete this user?").then((data) => {
       if (data === true) {
         this.popup.presentLoading();
-        this.userServ.remove(id).then(
+        this.userServ.delete(id).then(
           () => {
             this.popup.dismissLoading()
             this.router.navigate([""]);

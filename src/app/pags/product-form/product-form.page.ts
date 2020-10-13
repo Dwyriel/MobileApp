@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Categories, Product } from 'src/app/classes/product';
+import { PopUpsService } from 'src/app/services/popups.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -8,39 +10,59 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './product-form.page.html',
   styleUrls: ['./product-form.page.scss'],
 })
-export class ProductFormPage implements OnInit {
+export class ProductFormPage implements OnInit, OnDestroy {
   public product: Product = new Product();
+  id: string = null;
   cats = Categories;
 
-  constructor(private productService: ProductService, public alertController: AlertController) { }
+  constructor(private productService: ProductService, public alertController: AlertController, private popup: PopUpsService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    if (this.id) {
+      this.productService.get(this.id).subscribe(prod => { this.product = prod });
+    }
+  }
+
+  ngOnDestroy() {
+    this.product = new Product();
+    this.id = null;
   }
 
   public OnClick(form) {
     console.log(this.product);
 
     if (form.valid) {
-      this.productService.add(this.product).then(
-        ans => {
-          console.log("Registrado!", ans);
-          this.presentAlert("Aviso", "Produto registrado!");
+      this.popup.presentLoading();
+      if (!this.id) {
+        this.productService.add(this.product).then(ans => {
+          form.reset();
+          this.successSubmit("Heads up", "Product registered!", "");
         },
-        err => {
-          console.error("Erro:", err);
-          this.presentAlert("Erro:", "Produto não registrado!");
-        }
-      )
+          err => {
+            this.failSubmit("Error", "Product not registered!", err);
+          });
+      } else {
+        this.productService.update(this.product, this.id).then(ans => {
+          this.successSubmit("Heads up", "Product was updated!", "/tabs/product/" + this.id);
+        },
+          err => {
+            this.failSubmit("Error", "Product was not updated!", err);
+          });
+      }
     }
   }
 
-  async presentAlert(type: string, text: string) { //repeating code, might be a good idea to turn into a class (static if posible)
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: type,
-      message: text,
-      buttons: ['OK']
-    });
-    await alert.present();
+  successSubmit(title: string, description: string, navigateTo: string) {
+    this.id = null;
+    this.popup.presentAlert(title, description);
+    this.popup.dismissLoading();
+    setTimeout(() => this.router.navigate([navigateTo]), 300);//setTimeout seems to have fixed the weird error with dismissLoading, should try to find a better solution later
+  }
+
+  failSubmit(title: string, description: string, err) {
+    console.log(err);
+    this.popup.presentAlert(title, description);
+    this.popup.dismissLoading();
   }
 }

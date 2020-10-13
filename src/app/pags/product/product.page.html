@@ -12,7 +12,7 @@
   <p>
     <ion-text>{{product.price | currency:'BRL'}}</ion-text>
   </p>
-  <ion-button expand="block" size="medium" (click)="clickBuy()">Buy</ion-button>
+  <ion-button [disabled]="1 > product.stock" expand="block" size="medium" (click)="clickBuy()">Buy</ion-button>
   <br>Description:
   <p>
     <ion-text>{{product.description}}</ion-text>
@@ -21,5 +21,9 @@
   <ion-list>
     <ion-text>{{product.specs}}</ion-text>
   </ion-list>
-  <!--fix later-->
+  <!--fix positions later-->
+
+  <!--move this somewhere else later, leaving it here just for test purposes-->
+  <ion-button expand="block" size="medium" (click)="EditThisProduct(id)">Edit</ion-button>
+  <ion-button expand="block" size="medium" (click)="DeleteThisProduct(id)">Delete</ion-button>
 </ion-content>

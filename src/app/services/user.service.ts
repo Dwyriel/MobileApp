@@ -38,7 +38,7 @@ export class UserService {
     return this.fireDB.collection(this.colUser).doc(id).update(user);
   }
 
-  remove(id: string) {
+  delete(id: string) {
     return this.fireDB.collection(this.colUser).doc(id).delete();
   }
 }
