@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../classes/user';
 import { map } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +10,19 @@ import { map } from 'rxjs/operators';
 export class UserService {
   private colUser: string = "Users";
 
-  constructor(private fireDB: AngularFirestore) { }
+  constructor(private fireDB: AngularFirestore, public auth: AngularFireAuth) { }
 
   add(user: User) {
-    return this.fireDB.collection(this.colUser).add({
-      name: user.name,
-      email: user.email,
-      password: user.password,
-      tel: user.tel,
-      active: user.active
-    })
+    return this.auth.createUserWithEmailAndPassword(user.email, user.password).then(ans => {
+      return this.fireDB.collection(this.colUser).doc(ans.user.uid).set({
+        name: user.name,
+        email: user.email,
+        tel: user.tel,
+        active: user.active
+      }).catch(() => {
+        this.auth.user.subscribe(ans => ans.delete())
+      });
+    });
   }
 
   getAll() {

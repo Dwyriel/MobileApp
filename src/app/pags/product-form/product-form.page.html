@@ -1,8 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Register product</ion-title>
-  </ion-toolbar>
-</ion-header>
+<pag-header title="Register product"></pag-header>
 
 <ion-content [fullscreen]="true">
   <form (ngSubmit)="OnClick(form)" #form="ngForm">
@@ -41,10 +37,10 @@
     <!-- install bootstrap? :) -->
     <div *ngIf="!id">
       <ion-button expand="block" size="large" [disabled]="form.invalid" type="submit">Register</ion-button>
-      <ion-button expand="block" size="large" type="reset">Cancel</ion-button>
     </div>
     <div *ngIf="id">
       <ion-button expand="block" size="large" [disabled]="form.invalid" type="submit">Update</ion-button>
     </div>
+    <ion-button expand="block" size="large" type="reset" routerLink="/">Cancel</ion-button>
   </form>
 </ion-content>

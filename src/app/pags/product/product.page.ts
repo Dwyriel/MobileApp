@@ -12,6 +12,7 @@ import { ProductService } from 'src/app//services/product.service';
 export class ProductPage implements OnInit {
   public id: string = null;
   public product: Product = new Product();
+  public prodName: string ="";
 
   constructor(private activatedRoute: ActivatedRoute, private prodServ: ProductService, private router: Router, private popup: PopUpsService) { }
 
@@ -20,9 +21,10 @@ export class ProductPage implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if (this.id) {
       {
-        this.prodServ.get(this.id).subscribe(res => { this.product = res });
+        this.prodServ.get(this.id).subscribe(ans => { this.product = ans });
         setTimeout(() => {
-          console.log(this.product.name);//Will leave it here for reference. when deleting an entry errors occur saying that the product.name is undefined, couldn't find a workaround, but it doesn't affect anything other than messages on the console
+        this.prodName = this.product.name;//was not assigning anything without the timeout
+        console.log(this.product.name);//Will leave it here for reference. when deleting an entry errors occur saying that the product.name is undefined, couldn't find a workaround, but it doesn't affect anything other than messages on the console
           this.popup.dismissLoading()
         }, 300);//errors every time without the timeout
       }

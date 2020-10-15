@@ -1,8 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>New account</ion-title>
-  </ion-toolbar>
-</ion-header>
+<pag-header title="Account"></pag-header>
 
 <ion-content [fullscreen]="true">
   <form (ngSubmit)="OnClick(form)" #form="ngForm">
@@ -38,10 +34,10 @@
       <ion-button expand="block" size="large"
         [disabled]=" form.invalid|| (cf.value != ps.value || !validator.isValEmail(em.value))" type="submit">Send
       </ion-button>
-      <ion-button expand="block" size="large" type="reset">Cancel</ion-button>
     </div>
     <div *ngIf="id">
       <ion-button expand="block" size="large" [disabled]="form.invalid" type="submit">Update</ion-button>
     </div>
+    <ion-button expand="block" size="large" type="reset" routerLink="/">Cancel</ion-button>
   </form>
 </ion-content>

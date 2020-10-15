@@ -1,7 +1,7 @@
-import { Validation } from './validation';
+import { Validator } from './validation';
 
-describe('Validation', () => {
+describe('Validator', () => {
   it('should create an instance', () => {
-    expect(new Validation()).toBeTruthy();
+    expect(new Validator()).toBeTruthy();
   });
 });

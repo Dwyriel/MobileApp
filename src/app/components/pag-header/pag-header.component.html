@@ -1,0 +1,11 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title slot="start">
+      {{title}}
+    </ion-title>
+    <ion-title slot="end">
+      <ion-icon name="person" routerLink="/login" *ngIf="!user"></ion-icon>
+      <ion-text routerLink="/tabs/user" *ngIf="user">{{user.name}}</ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>

@@ -1,4 +1,4 @@
-export class Validation {//todo add other validations
+export class Validator {//todo add other validations
 
     constructor() { }
 

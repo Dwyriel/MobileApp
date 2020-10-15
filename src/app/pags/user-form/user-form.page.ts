@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/classes/user';
-import { Validation } from 'src/app/classes/validation';
+import { Validator } from 'src/app/classes/validation';
 import { PopUpsService } from 'src/app/services/popups.service';
 
 
@@ -15,13 +15,13 @@ export class UserFormPage implements OnInit, OnDestroy {
   public id: string = null;
   public user: User = new User;
   public confirm: string = "";
-  public minlength = 2; //todo chance later
-  public validator: Validation = new Validation();
+  public minlength = 6; //todo chance later
+  public validator: Validator = new Validator();
 
   constructor(private userService: UserService, private activatedRoute: ActivatedRoute, private router: Router, private popup: PopUpsService) { }
 
   ngOnInit() {
-    this.validator = new Validation();
+    this.validator = new Validator();
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if (this.id) {
       this.userService.get(this.id).subscribe(data => { this.user = data })

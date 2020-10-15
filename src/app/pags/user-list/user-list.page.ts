@@ -41,7 +41,7 @@ export class UserListPage implements OnInit {
         this.userServ.delete(id).then(
           () => {
             setTimeout(() => this.popup.dismissLoading(), 50);
-            this.router.navigate([""]);
+            this.router.navigate(["/tabs/users"]);
           },
           err => {
             this.popup.dismissLoading()
