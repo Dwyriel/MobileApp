@@ -15,4 +15,6 @@
       <ion-text>{{user.tel}}</ion-text>
     </ion-item>
   </ion-list>
+  <ion-button type="button" color="primary" expand="block" routerLink="/tabs/userForm/{{id}}">Edit</ion-button>
+  <ion-button type="button" color="secondary" expand="block" (click)="logout()">Logout</ion-button>
 </ion-content>

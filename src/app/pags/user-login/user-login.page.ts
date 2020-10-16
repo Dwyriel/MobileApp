@@ -17,14 +17,21 @@ export class UserLoginPage implements OnInit {
   constructor(private userServ: UserService, private popup: PopUpsService, private router: Router) { }
 
   ngOnInit() {
+    this.userServ.auth.user.subscribe(ans => {
+      if (ans)
+        this.router.navigate(["/"]);
+    });
   }
 
   OnClick(form) {
+    this.popup.presentLoading();
     this.userServ.auth.signInWithEmailAndPassword(this.email, this.password).then(ans => {
+      this.popup.dismissLoading();
       form.reset();
-      this.router.navigate(["/tabs/user/" + ans.user.uid]);
+      setTimeout(() => this.router.navigate(["/tabs/user/" + ans.user.uid]), 300);
     },
       err => {
+        this.popup.dismissLoading();
         this.password = "";
         console.log("Error: ", err);
         this.popup.presentAlert("Error", "Email or password invalid");

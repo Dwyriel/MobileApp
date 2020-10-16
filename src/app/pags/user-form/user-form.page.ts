@@ -11,7 +11,7 @@ import { PopUpsService } from 'src/app/services/popups.service';
   templateUrl: './user-form.page.html',
   styleUrls: ['./user-form.page.scss'],
 })
-export class UserFormPage implements OnInit, OnDestroy {
+export class UserFormPage implements OnInit {
   public id: string = null;
   public user: User = new User;
   public confirm: string = "";
@@ -22,16 +22,29 @@ export class UserFormPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.validator = new Validator();
-    this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if (this.id) {
-      this.userService.get(this.id).subscribe(data => { this.user = data })
     }
   }
 
-  ngOnDestroy() { // not working the way I intended
+  ionViewWillEnter() {
+    this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    this.checkIfLogged();
+  }
+
+  ionViewWillLeave() {
     this.user = new User();
     this.id = null;
     this.confirm = "";
+  }
+
+  async checkIfLogged() {
+    await this.userService.auth.user.subscribe(ans => {
+      if (ans && !this.id) {
+        this.router.navigate(["/tabs/user"]);
+      } else if (ans.uid == this.id) {//will give me an error but it'll work anyway, if I want to remove the error just nest ifs (validade ans then validade ans.uid==id)
+        this.userService.get(this.id).subscribe(data => { this.user = data })
+      }
+    });
   }
 
   OnClick(form) {

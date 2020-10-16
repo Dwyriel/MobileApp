@@ -15,20 +15,38 @@ export class UserProfilePage implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private userServ: UserService, private router: Router, private popup: PopUpsService) { }
 
-  ngOnInit() {
-    this.user.name = "User";
-    this.id = this.activatedRoute.snapshot.paramMap.get("id");
-    if (this.id) {
-      {
-        this.popup.presentLoading();
-        this.userServ.get(this.id).subscribe(res => {
-          this.user = res;
-          setTimeout(() => this.popup.dismissLoading(), 200);
-        });
-      }
-    } else {
-      this.router.navigate(["/tabs/users"]);
-    }
+  ngOnInit() { }
+
+  ionViewWillEnter() {
+    this.getUser();
   }
 
+
+  async getUser() {
+    this.popup.presentLoading();
+    await this.userServ.auth.user.subscribe(ans => {
+      if (ans) {
+        this.id = ans.uid;
+        this.userServ.get(this.id).subscribe(ans2 => {
+          this.user = ans2;
+          setTimeout(() => this.popup.dismissLoading(), 300);
+        });
+      } else {
+        setTimeout(() => this.popup.dismissLoading(), 300);
+        this.router.navigate(["/login"]);
+      }
+    }, err => {
+      setTimeout(() => this.popup.dismissLoading(), 300);
+      this.user = null;
+      this.router.navigate(["/login"]);
+    });
+  }
+
+  logout() {
+    this.popup.presentLoading();
+    this.userServ.auth.signOut().then(() => {
+      setTimeout(() => this.popup.dismissLoading(), 300);
+      this.router.navigate(["/"])
+    });
+  }
 }

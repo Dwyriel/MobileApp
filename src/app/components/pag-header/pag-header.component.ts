@@ -17,9 +17,9 @@ export class PagHeaderComponent implements OnInit {
   async verfUser() {
     await this.userServ.auth.user.subscribe(ans => {
       if (ans)
-        this.userServ.get(ans.uid).subscribe(ans => {
-          this.user = ans;
-        });
+        this.userServ.get(ans.uid).subscribe(ans => this.user = ans);
+      else
+        this.user = null;
     },
       err => {
         this.user = null;

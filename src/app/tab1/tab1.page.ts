@@ -8,8 +8,6 @@ import { UserService } from '../services/user.service';
 })
 export class Tab1Page implements OnInit {
   title: string = "Tab1";
-  public user: any;
-  constructor(private userServ: UserService) { }
 
   ngOnInit() { }
 }
