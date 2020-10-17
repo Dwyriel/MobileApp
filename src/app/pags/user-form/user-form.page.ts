@@ -41,7 +41,7 @@ export class UserFormPage implements OnInit {
     await this.userService.auth.user.subscribe(ans => {
       if (ans && !this.id) {
         this.router.navigate(["/tabs/user"]);
-      } else if (ans.uid == this.id) {//will give me an error but it'll work anyway, if I want to remove the error just nest ifs (validade ans then validade ans.uid==id)
+      } else if (ans.uid == this.id) {//will give me an error but it'll work anyway, if I want to remove the error just nest ifs (validade ans then validade ans.uid==id) or only use the auth.uid
         this.userService.get(this.id).subscribe(data => { this.user = data })
       }
     });

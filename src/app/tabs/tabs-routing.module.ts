@@ -16,7 +16,7 @@ const routes: Routes = [
         loadChildren: () => import('../pags/user-form/user-form.module').then(m => m.UserFormPageModule)
       },
       {
-        path: 'userForm/:id',
+        path: 'userForm/:id',//maybe remove this
         loadChildren: () => import('../pags/user-form/user-form.module').then(m => m.UserFormPageModule)
       },
       {
@@ -24,7 +24,7 @@ const routes: Routes = [
         loadChildren: () => import('../pags/user-list/user-list.module').then(m => m.UserListPageModule)
       },
       {
-        path: 'user/:id',
+        path: 'user/:id',//maybe remove this
         loadChildren: () => import('../pags/user-profile/user-profile.module').then(m => m.UserProfilePageModule)
       },
       {
