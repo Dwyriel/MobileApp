@@ -42,6 +42,10 @@ export class UserService {
     return this.fireDB.collection(this.colUser).doc(id).update(user);
   }
 
+  updatePhoto(id: string, photo: string) {
+    return this.fireDB.collection(this.colUser).doc(id).update({ photo: photo });
+  }
+
   delete(id: string) {
     return this.fireDB.collection(this.colUser).doc(id).delete();
   }

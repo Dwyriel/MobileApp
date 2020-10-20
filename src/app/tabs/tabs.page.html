@@ -19,6 +19,7 @@
     <ion-tab-button tab="products">
       <ion-icon name="cash-outline"></ion-icon>
       <ion-label>Marketplace</ion-label>
+      <ion-badge color="warning" *ngIf="prodAmount > 0">{{prodAmount}}</ion-badge>
     </ion-tab-button>
 
   </ion-tab-bar>

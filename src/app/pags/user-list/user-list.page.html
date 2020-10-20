@@ -14,7 +14,8 @@
 
       <ion-item lines="inset" routerLink="/tabs/user/{{user.id}}">
         <ion-avatar slot="start">
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          <img *ngIf="user.photo" [src]="user.photo">
+          <img *ngIf="!user.photo" src="assets/perfil.png">
         </ion-avatar>
         <ion-text>{{user.name}} - {{user.email}}</ion-text>
       </ion-item>

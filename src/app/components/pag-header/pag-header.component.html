@@ -5,7 +5,8 @@
     </ion-title>
     <ion-title slot="end">
       <ion-icon name="person" routerLink="/login" *ngIf="!user"></ion-icon>
-      <ion-text routerLink="/tabs/user" *ngIf="user">{{user.name}}</ion-text>
+      <img *ngIf="user && !user.photo" routerLink="/tabs/user" src="assets/perfil.png">
+      <img *ngIf="user && user.photo" routerLink="/tabs/user" [src]="user.photo">
     </ion-title>
   </ion-toolbar>
 </ion-header>

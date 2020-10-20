@@ -15,11 +15,16 @@ export class ProductService {
     return this.fireDB.collection(this.colProduct).add({
       name: product.name,
       price: product.price,
+      gallery: product.gallery,
       category: product.category,
       description: product.description,
       specs: product.specs,
       stock: product.stock,
     })
+  }
+
+  updatePhoto(id: string, photo: string[]) {
+    return this.fireDB.collection(this.colProduct).doc(id).update({ photo: [...photo] });
   }
 
   getAll() {
