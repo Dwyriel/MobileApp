@@ -1,5 +1,6 @@
 export class Product {
     name: string;
+    gallery: string[];
     price: number;
     category: Categories; //todo change to enum - correction: dont use enum cuz enum on ts/js sucks ass, use something else :)
     description: string;
@@ -7,9 +8,9 @@ export class Product {
     stock: number;
 }
 
-export enum Categories{
-    Casa, 
-    Eletronicos, 
-    Eletrodomesticos, 
+export enum Categories {
+    Casa,
+    Eletronicos,
+    Eletrodomesticos,
     Roupas,
 }

@@ -24,7 +24,7 @@ export class ProductPage implements OnInit {
         this.prodServ.get(this.id).subscribe(ans => { this.product = ans });
         setTimeout(() => {
         this.prodName = this.product.name;//was not assigning anything without the timeout
-        console.log(this.product.name);//Will leave it here for reference. when deleting an entry errors occur saying that the product.name is undefined, couldn't find a workaround, but it doesn't affect anything other than messages on the console
+        //Will leave it here for reference. when deleting an entry errors occur saying that the product.name is undefined, couldn't find a workaround, but it doesn't affect anything other than messages on the console
           this.popup.dismissLoading()
         }, 300);//errors every time without the timeout
       }

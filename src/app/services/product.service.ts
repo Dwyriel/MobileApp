@@ -12,7 +12,7 @@ export class ProductService {
   constructor(private fireDB: AngularFirestore) { }
 
   add(product: Product) {
-    return this.fireDB.collection<Product>(this.colProduct).add({
+    return this.fireDB.collection(this.colProduct).add({
       name: product.name,
       price: product.price,
       category: product.category,

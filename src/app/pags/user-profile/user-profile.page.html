@@ -3,6 +3,10 @@
 <ion-content [fullscreen]="true">
   <ion-list>
     <ion-item>
+      <img [src]="preview" (click)="alterPhoto()" *ngIf="preview">
+      <img src="assets/perfil.png" (click)="alterPhoto()" *ngIf="!preview">
+    </ion-item>
+    <ion-item>
       <ion-label>Name</ion-label>
       <ion-text>{{user.name}}</ion-text>
     </ion-item>
@@ -15,6 +19,6 @@
       <ion-text>{{user.tel}}</ion-text>
     </ion-item>
   </ion-list>
-  <ion-button type="button" color="primary" expand="block" routerLink="/tabs/userForm/{{id}}">Edit</ion-button>
-  <ion-button type="button" color="secondary" expand="block" (click)="logout()">Logout</ion-button>
+  <ion-button *ngIf="!id || id == user.id" type="button" color="primary" expand="block" routerLink="/tabs/userForm/{{id}}">Edit</ion-button>
+  <ion-button *ngIf="!id || id == user.id" type="button" color="secondary" expand="block" (click)="logout()">Logout</ion-button>
 </ion-content>
