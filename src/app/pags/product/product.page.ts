@@ -4,6 +4,13 @@ import { Product } from 'src/app//classes/product';
 import { PopUpsService } from 'src/app/services/popups.service';
 import { ProductService } from 'src/app//services/product.service';
 
+export const slideOpts = {
+  slidesPerView: 1,
+  slidesPerColumn: 1,
+  slidesPerGroup: 1,
+  watchSlidesProgress: true,
+}
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.page.html',
@@ -12,7 +19,7 @@ import { ProductService } from 'src/app//services/product.service';
 export class ProductPage implements OnInit {
   public id: string = null;
   public product: Product = new Product();
-  public prodName: string ="";
+  public slideOpts = slideOpts;
 
   constructor(private activatedRoute: ActivatedRoute, private prodServ: ProductService, private router: Router, private popup: PopUpsService) { }
 
@@ -22,11 +29,8 @@ export class ProductPage implements OnInit {
     if (this.id) {
       {
         this.prodServ.get(this.id).subscribe(ans => { this.product = ans });
-        setTimeout(() => {
-        this.prodName = this.product.name;//was not assigning anything without the timeout
+        setTimeout(() => { this.popup.dismissLoading() }, 300);//errors occur every time without the timeout
         //Will leave it here for reference. when deleting an entry errors occur saying that the product.name is undefined, couldn't find a workaround, but it doesn't affect anything other than messages on the console
-          this.popup.dismissLoading()
-        }, 300);//errors every time without the timeout
       }
     } else {
       this.router.navigate(["/tabs/products/"]);

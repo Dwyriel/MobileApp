@@ -1,15 +1,9 @@
-<pag-header [title]="prodName"></pag-header>
+<pag-header [title]="product.name"></pag-header>
 
 <ion-content [fullscreen]="true">
-  <ion-slides pager="true" [options]=""> <!--slideOpts-->
-    <ion-slide>
-      <h1>Slide 1</h1>
-    </ion-slide>
-    <ion-slide>
-      <h1>Slide 2</h1>
-    </ion-slide>
-    <ion-slide>
-      <h1>Slide 3</h1>
+  <ion-slides pager="true"  [options]="slideOpts">
+    <ion-slide *ngFor="let photo of product.gallery; let i = index">
+      <ion-img [src]="photo"></ion-img>
     </ion-slide>
   </ion-slides>
   <p>

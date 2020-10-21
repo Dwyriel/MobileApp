@@ -2,6 +2,14 @@
 
 <ion-content [fullscreen]="true">
   <form (ngSubmit)="OnClick(form)" #form="ngForm">
+    <ion-slides pager="true"  [options]="slideOpts">
+      <ion-slide *ngFor="let photo of product.gallery; let i = index">
+        <img [src]="photo" (click)="chancephoto(i)">
+      </ion-slide>
+      <ion-slide>
+        <img src="assets/NewPhoto.png" (click)="newphoto()">
+      </ion-slide>
+    </ion-slides>
     <ion-item>
       <ion-label position="floating">Name</ion-label>
       <ion-input type="text" name="prod-name" [(ngModel)]=product.name required clearInput pattern="[*-_0-9a-zA-Z ]*">
@@ -41,6 +49,6 @@
     <div *ngIf="id">
       <ion-button expand="block" size="large" [disabled]="form.invalid" type="submit">Update</ion-button>
     </div>
-    <ion-button expand="block" size="large" type="reset" routerLink="/">Cancel</ion-button>
+    <ion-button expand="block" size="large" type="reset" routerLink="/tabs/products">Cancel</ion-button>
   </form>
 </ion-content>

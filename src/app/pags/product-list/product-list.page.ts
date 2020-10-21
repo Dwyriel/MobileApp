@@ -26,7 +26,7 @@ export class ProductListPage implements OnInit {
     this.popup.presentLoading();
     this.prodServ.getAll().subscribe(res => {//as a subscription, this does not require an update and it automatically updates. this means that this code is useless.
       this.products = res;
-      setTimeout(() => this.popup.dismissLoading(), 200);
+      setTimeout(() => this.popup.dismissLoading(), 300);
       if (event)
         event.target.complete();
     });

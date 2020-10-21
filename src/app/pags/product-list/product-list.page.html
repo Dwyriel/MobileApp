@@ -8,7 +8,7 @@
 
   <ion-list>
     <ion-item lines="inset" *ngFor="let product of products" routerLink="/tabs/product/{{product.id}}">
-      <ion-img src="#placeholder" height="" [alt]="//product.name"></ion-img>
+      <img *ngIf="product.gallery" [src]="product.gallery[0]" [alt]="product.name">
       <ion-label>
         <h2>{{product.name}}</h2>
         <h3>{{product.price | currency:'BRL' }}</h3>

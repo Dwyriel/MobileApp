@@ -1,6 +1,6 @@
 export class Product {
     name: string;
-    gallery: string[];
+    gallery: string[] = [];
     price: number;
     category: Categories; //todo change to enum - correction: dont use enum cuz enum on ts/js sucks ass, use something else :)
     description: string;
