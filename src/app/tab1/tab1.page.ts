@@ -7,7 +7,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
-  title: string = "Tab1";
+  title: string = "Home";
 
   ngOnInit() { }
 }

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "629015312241",
+    "firebase_url": "https://appmobile1-1a8ed.firebaseio.com",
+    "project_id": "appmobile1-1a8ed",
+    "storage_bucket": "appmobile1-1a8ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629015312241:android:f87bd1402b0bb451fd28d0",
+        "android_client_info": {
+          "package_name": "br.com.Dwy.FoxyMarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629015312241-hfmudk6dmfang5h3lpkttbnt35odb9f4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsLbcd3cWIROtbZGn6rctt865ELB__2rM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "629015312241-hfmudk6dmfang5h3lpkttbnt35odb9f4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

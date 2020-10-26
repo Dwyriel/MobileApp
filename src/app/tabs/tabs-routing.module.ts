@@ -52,6 +52,10 @@ const routes: Routes = [
         loadChildren: () => import('../pags/product/product.module').then(m => m.ProductPageModule)
       },
       {
+        path: 'map',
+        loadChildren: () => import('../pags/maps/maps.module').then( m => m.MapsPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
