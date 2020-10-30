@@ -14,6 +14,8 @@ export class MapsPage implements OnInit {
   longitude: any;
   address: string;
   fromGPS: boolean;
+  address2: NativeGeocoderResult;
+
   options: NativeGeocoderOptions = {
     useLocale: true,
     maxResults: 5
@@ -45,9 +47,8 @@ export class MapsPage implements OnInit {
   }*/
 
   async getPositionOnMap() {
-    console.log(this.address);
     if (!this.address) {
-      this.popup.presentAlert("Invalid", "Please enter a valid address.");
+      this.popup.presentAlert("Invalid address", "Please enter a valid address.");
       return;
     }
     this.popup.presentLoading();

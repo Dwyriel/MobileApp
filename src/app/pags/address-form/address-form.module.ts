@@ -4,21 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UserProfilePageRoutingModule } from './user-profile-routing.module';
+import { AddressFormPageRoutingModule } from './address-form-routing.module';
 
-import { UserProfilePage } from './user-profile.page';
+import { AddressFormPage } from './address-form.page';
 import { ComponentModule } from 'src/app/components/component.module';
-import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UserProfilePageRoutingModule,
+    AddressFormPageRoutingModule,
     ComponentModule,
-    AgmCoreModule,
   ],
-  declarations: [UserProfilePage]
+  declarations: [AddressFormPage]
 })
-export class UserProfilePageModule {}
+export class AddressFormPageModule {}

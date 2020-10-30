@@ -22,8 +22,6 @@ export class UserFormPage implements OnInit {
 
   ngOnInit() {
     this.validator = new Validator();
-    if (this.id) {
-    }
   }
 
   ionViewWillEnter() {
@@ -59,7 +57,7 @@ export class UserFormPage implements OnInit {
             this.failedSubmit("Error", "User was not registered!", err);
           });
       } else {
-        this.userService.update(this.user, this.id).then(awn => {
+        this.userService.update(this.user, this.id).then(asn => {
           form.reset();
           this.successfulSubmit("Heads up", "User was updated!", "/tabs/user/" + this.id);
         }, err => {

@@ -24,12 +24,20 @@ const routes: Routes = [
         loadChildren: () => import('../pags/user-list/user-list.module').then(m => m.UserListPageModule)
       },
       {
-        path: 'user/:id',//maybe remove this
+        path: 'user',
         loadChildren: () => import('../pags/user-profile/user-profile.module').then(m => m.UserProfilePageModule)
       },
       {
-        path: 'user',
+        path: 'user/:id',
         loadChildren: () => import('../pags/user-profile/user-profile.module').then(m => m.UserProfilePageModule)
+      },
+      {
+        path: 'addressForm',
+        loadChildren: () => import('../pags/address-form/address-form.module').then( m => m.AddressFormPageModule)
+      },
+      {
+        path: 'addressForm/:id',
+        loadChildren: () => import('../pags/address-form/address-form.module').then( m => m.AddressFormPageModule)
       },
       {
         path: 'productForm',

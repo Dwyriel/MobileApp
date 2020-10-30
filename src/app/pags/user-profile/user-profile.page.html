@@ -21,6 +21,26 @@
       <ion-text>{{user.tel}}</ion-text>
     </ion-item>
   </ion-list>
+  <ion-item-group *ngIf="user.address">
+    <ion-item>
+      <ion-label>State: {{address.state}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>City: {{address.city}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>CEP: {{address.cep}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Address: {{address.street}}, {{address.number}}</ion-label>
+    </ion-item>
+  </ion-item-group>
+  <ion-button *ngIf="user.address" type="button" color="primary" expand="block" (click)="ShowMap()">Show on Map</ion-button>
+  <agm-map *ngIf="showOnMap" [latitude]="latitude" [longitude]="longitude" [zoom]="18" [disableDefaultUI]="false">
+    <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]=false></agm-marker>
+  </agm-map>
+  <ion-button *ngIf="!user.address && (user.id == id || !id)" type="button" color="primary" expand="block" routerLink="/tabs/addressForm">Add address</ion-button>
+  <ion-button *ngIf="user.address && (user.id == id || !id)" type="button" color="primary" expand="block" routerLink="/tabs/addressForm/{{user.address}}">Update address</ion-button>
   <ion-button *ngIf="!id || id == user.id" type="button" color="primary" expand="block" routerLink="/tabs/userForm/{{user.id}}">Edit</ion-button>
   <ion-button *ngIf="!id || id == user.id" type="button" color="secondary" expand="block" (click)="logout()">Logout</ion-button>
 </ion-content>

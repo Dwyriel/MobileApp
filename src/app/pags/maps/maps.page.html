@@ -3,7 +3,7 @@
 <ion-content [fullscreen]="true">
   <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="15" [disableDefaultUI]="false">
     <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]=true></agm-marker>
-  </agm-map><!-- review this / compare with the one on the tutorials github-->
+  </agm-map>
   <ion-item>
     <ion-label position="floating">Enter Address</ion-label>
     <ion-input type="text" [(ngModel)]="address" name="address"></ion-input>
