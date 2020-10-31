@@ -6,22 +6,21 @@
       <ion-img [src]="photo" (click)="ImgOptions(i)"></ion-img>
     </ion-slide>
   </ion-slides>
-  <h2>{{product.name}}</h2>
-  <p>
+  <h2 class="ion-margin">{{product.name}}</h2>
+  <p class="ion-margin">
     {{product.price | currency:'BRL'}}
   </p>
   <ion-button [disabled]="(1 > product.stock) || (user.id == product.posterID)" expand="block" size="medium"
     (click)="clickBuy()" class="ion-margin">Buy</ion-button>
-  <h3>Description:</h3>
-  <p>
+  <h3 class="ion-margin">Description:</h3>
+  <p class="ion-margin">
     <ion-text>{{product.description}}</ion-text>
   </p>
-  <br>
-  <h3>Specs:</h3>
-  <p>
+  <h3 class="ion-margin">Specs:</h3>
+  <p class="ion-margin">
     <ion-text>{{product.specs}}</ion-text>
   </p>
-  <ion-row>
+  <ion-row class="ion-margin">
     <h3>Seller:</h3>
     <h4 routerLink="/tabs/user/{{seller.id}}">&nbsp;&nbsp;{{seller.name}}<span style="color: aqua;"> - View profile</span></h4>
   </ion-row>
