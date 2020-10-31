@@ -1,6 +1,6 @@
 {
   "appId": "br.com.Dwy.FoxyMarket",
-  "appName": "appExemple",
+  "appName": "FoxyMarket",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

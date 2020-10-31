@@ -72,10 +72,13 @@ export class UserProfilePage implements OnInit {
 
   async alterPhoto() {
     await this.cameraServ.alterPhoto().then((returnedPhoto) => {
-      this.user.photo = returnedPhoto;
-      this.userServ.updatePhoto(this.id, returnedPhoto).then(() => {//this was acting up and refusing to send the photo to the database, tried a bunch of things, went back to this code and it worked. keep and eye out for this
-        setTimeout(() => this.popup.dismissLoading(), 300);
-      });
+      if (returnedPhoto) {
+        this.user.photo = returnedPhoto;
+        this.userServ.updatePhoto(this.id, returnedPhoto).then(() => {//this was acting up and refusing to send the photo to the database, tried a bunch of things, went back to this code and it worked. keep and eye out for this
+          setTimeout(() => this.popup.dismissLoading(), 300);
+        });
+      } else
+        setTimeout(() => this.popup.dismissLoading(), 300);//not the best way to do it but I don't want to mess with the code above, so i'll leave the else here and repeat the code
     });
   }
 
@@ -83,13 +86,13 @@ export class UserProfilePage implements OnInit {
     this.popup.presentLoading();
     this.userServ.auth.signOut().then(() => {
       setTimeout(() => this.popup.dismissLoading(), 300);
-      this.router.navigate(["/"])
+      this.router.navigate(["/"]);
     });
   }
 
   async ShowMap() {
     if (!this.showOnMap) {
-      var fullAddress = this.address.cep + " , " + this.address.street + " , " + this.address.number;
+      var fullAddress = this.address.state + " , " + this.address.city + " , " + this.address.cep + " , " + this.address.street + " , " + this.address.number;
       this.popup.presentLoading();
       await this.natGeocoder.forwardGeocode(fullAddress, this.options).then((ans: NativeGeocoderResult[]) => {
         this.latitude = parseFloat(ans[0].latitude);

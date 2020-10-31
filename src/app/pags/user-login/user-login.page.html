@@ -12,9 +12,9 @@
       <ion-input type="password" name="user-ps" [(ngModel)]=password required></ion-input>
     </ion-item>
 
-    <ion-button expand="block" size="large" [disabled]=" form.invalid || !validator.isValEmail(em.value)" type="submit">
+    <ion-button expand="block" size="large" [disabled]=" form.invalid || !validator.isValEmail(em.value)" class="ion-margin" type="submit">
       Send </ion-button>
-    <ion-button expand="block" size="large" type="reset" routerLink="/">Cancel</ion-button>
-    <ion-button expand="block" size="large" type="reset" routerLink="/tabs/userForm">New Account</ion-button>
+    <ion-button expand="block" size="large" type="reset" class="ion-margin" routerLink="/">Cancel</ion-button>
+    <ion-button expand="block" size="large" type="reset" class="ion-margin" routerLink="/tabs/userForm">New Account</ion-button>
   </form>
 </ion-content>

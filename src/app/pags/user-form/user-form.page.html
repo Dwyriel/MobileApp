@@ -31,13 +31,13 @@
         <ion-input type="password" name="confirm" [(ngModel)]=confirm #cf="ngModel" minlength="{{minlength}}" required>
         </ion-input>
       </ion-item>
-      <ion-button expand="block" size="large"
+      <ion-button class="ion-margin" expand="block" size="large"
         [disabled]=" form.invalid|| (cf.value != ps.value || !validator.isValEmail(em.value))" type="submit">Send
       </ion-button>
     </div>
     <div *ngIf="id">
-      <ion-button expand="block" size="large" [disabled]="form.invalid" type="submit">Update</ion-button>
+      <ion-button class="ion-margin" expand="block" size="large" [disabled]="form.invalid" type="submit">Update</ion-button>
     </div>
-    <ion-button expand="block" size="large" type="reset" routerLink="/">Cancel</ion-button>
+    <ion-button class="ion-margin" expand="block" size="large" type="reset" routerLink="/">Cancel</ion-button>
   </form>
 </ion-content>

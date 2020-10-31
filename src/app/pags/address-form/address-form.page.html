@@ -23,11 +23,11 @@
       <ion-input type="text" name="number" [(ngModel)]=address.number required></ion-input>
     </ion-item>
     <div *ngIf="!id">
-      <ion-button expand="block" size="large" [disabled]="form.invalid" type="submit">Send</ion-button>
+      <ion-button class="ion-margin" expand="block" size="large" [disabled]="form.invalid" type="submit">Send</ion-button>
     </div>
     <div *ngIf="id">
-      <ion-button expand="block" size="large" [disabled]="form.invalid" type="submit">Update</ion-button>
+      <ion-button class="ion-margin" expand="block" size="large" [disabled]="form.invalid" type="submit">Update</ion-button>
     </div>
-    <ion-button expand="block" size="large" type="reset" routerLink="/tabs/user">Cancel</ion-button>
+    <ion-button class="ion-margin" expand="block" size="large" type="reset" routerLink="/tabs/user">Cancel</ion-button>
   </form>
 </ion-content>

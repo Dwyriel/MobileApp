@@ -78,17 +78,25 @@ export class ProductFormPage implements OnInit, OnDestroy {
       this.product.gallery = [];
     var photo: string;
     await this.cameraServ.alterPhoto().then((returnedPhoto) => {
-      photo = returnedPhoto;
-      this.product.gallery.push(photo);
+      if (returnedPhoto) {
+        photo = returnedPhoto;
+        this.product.gallery.push(photo);
+      }
       setTimeout(() => this.popup.dismissLoading(), 300);
     });
   }
 
   async chancephoto(index) {
     var photo: string;
-    await this.cameraServ.alterPhoto().then((returnedPhoto) => {
-      photo = returnedPhoto;
-      this.product.gallery[index] = photo;
+    await this.cameraServ.alterProdPhoto().then((returnedPhoto) => {
+      if (returnedPhoto) {
+        if (returnedPhoto == "Delete") {
+          this.product.gallery.splice(index, 1);
+        } else {
+          photo = returnedPhoto;
+          this.product.gallery[index] = photo;
+        }
+      }
       setTimeout(() => this.popup.dismissLoading(), 300);
     });
   }

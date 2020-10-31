@@ -1,9 +1,15 @@
 <pag-header [title]="title"></pag-header>
 
 <ion-content [fullscreen]="true">
-  <ion-item slot=""><br>
-    Welcome to FoxyMarket.<br><br>
-    Sadly this is a big empty void and<br>
-    there's nothing to see here. (yet)<br>
-  </ion-item>
+    <div class="ion-text-center">
+      <p>Welcome to FoxyMarket.</p>
+    </div>
+    <div class="ion-text-center">
+      <p>Sadly this is mostly a big empty void.</p>
+    </div>
+    <div class="ion-text-center">
+      <p>Below are some useful links for testing</p>
+    </div>
+  <ion-button type="button" color="primary" expand="block" routerLink="/tabs/map" class="ion-margin">Map</ion-button>
+  <ion-button type="button" color="primary" expand="block" routerLink="/tabs/users" class="ion-margin">All Users</ion-button>
 </ion-content>

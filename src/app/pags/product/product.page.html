@@ -3,7 +3,7 @@
 <ion-content [fullscreen]="true">
   <ion-slides pager="true"  [options]="slideOpts">
     <ion-slide *ngFor="let photo of product.gallery; let i = index">
-      <ion-img [src]="photo"></ion-img>
+      <ion-img [src]="photo" (click)="ImgOptions(i)"></ion-img>
     </ion-slide>
   </ion-slides>
   <p>
@@ -12,18 +12,18 @@
   <p>
     <ion-text>{{product.price | currency:'BRL'}}</ion-text>
   </p>
-  <ion-button [disabled]="1 > product.stock" expand="block" size="medium" (click)="clickBuy()">Buy</ion-button>
+  <ion-button [disabled]="1 > product.stock" expand="block" size="medium" (click)="clickBuy()" class="ion-margin">Buy</ion-button>
   <br>Description:
   <p>
     <ion-text>{{product.description}}</ion-text>
   </p>
   <br>Specs:
-  <ion-list>
+  <p>
     <ion-text>{{product.specs}}</ion-text>
-  </ion-list>
+  </p>
   <!--fix positions later-->
 
   <!--move this somewhere else later, leaving it here just for test purposes-->
-  <ion-button expand="block" size="medium" (click)="EditThisProduct(id)">Edit</ion-button>
-  <ion-button expand="block" size="medium" (click)="DeleteThisProduct(id)">Delete</ion-button>
+  <ion-button expand="block" size="medium" (click)="EditThisProduct(id)" class="ion-margin">Edit</ion-button>
+  <ion-button expand="block" size="medium" (click)="DeleteThisProduct(id)" class="ion-margin">Delete</ion-button>
 </ion-content>

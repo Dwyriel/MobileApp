@@ -38,7 +38,7 @@ export class ProductPage implements OnInit {
   }
 
   clickBuy() {
-    console.log('Hello, u just bought this overly expensive item');
+    this.popup.presentAlert("Hello", "You just bought this overly expensive item");
   }
 
   EditThisProduct(id) {
@@ -61,5 +61,9 @@ export class ProductPage implements OnInit {
         )
       }
     });
+  }
+
+  ImgOptions(index){
+
   }
 }

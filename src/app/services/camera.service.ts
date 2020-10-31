@@ -80,4 +80,42 @@ export class CameraService {
     await actionSheet.onDidDismiss().then((data) => { photoPath = data.data });
     return photoPath;
   }
+
+  async alterProdPhoto() {
+    var photoPath;
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Existing or new photo?',
+      cssClass: 'my-custom-class',
+      buttons: [{
+        text: 'Camera',
+        icon: 'camera',
+        handler: () => {
+          actionSheet.dismiss(this.takePhoto());
+          return false;
+        }
+      }, {
+        text: 'Gallery',
+        icon: 'image',
+        handler: () => {
+          actionSheet.dismiss(this.choosePhoto());
+          return false;
+        }
+      }, {
+        text: 'Delete',
+        icon: 'trash',
+        handler: () => {
+          actionSheet.dismiss("Delete");//terrible way to do this, but fine for now
+          return false;
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => { }
+      }]
+    });
+    await actionSheet.present();
+    await actionSheet.onDidDismiss().then((data) => { photoPath = data.data });
+    return photoPath;
+  }
 }

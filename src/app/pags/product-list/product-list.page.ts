@@ -22,9 +22,9 @@ export class ProductListPage implements OnInit {
     this.load(event);
   }
 
-  load(event?) {
+  async load(event?) {
     this.popup.presentLoading();
-    this.prodServ.getAll().subscribe(res => {//as a subscription, this does not require an update and it automatically updates. this means that this code is useless.
+    await this.prodServ.getAll().subscribe(res => {//as a subscription, this does not require an update and it automatically updates. this means that this code is useless.
       this.products = res;
       setTimeout(() => this.popup.dismissLoading(), 300);
       if (event)
