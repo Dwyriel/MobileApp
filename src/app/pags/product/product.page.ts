@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app//classes/product';
 import { PopUpsService } from 'src/app/services/popups.service';
 import { ProductService } from 'src/app//services/product.service';
+import { User } from 'src/app/classes/user';
+import { UserService } from 'src/app/services/user.service';
 
 export const slideOpts = {
   slidesPerView: 1,
@@ -18,23 +20,49 @@ export const slideOpts = {
 })
 export class ProductPage implements OnInit {
   public id: string = null;
+  public user: User = new User();
+  public seller: User = new User();
   public product: Product = new Product();
   public slideOpts = slideOpts;
 
-  constructor(private activatedRoute: ActivatedRoute, private prodServ: ProductService, private router: Router, private popup: PopUpsService) { }
+  constructor(private activatedRoute: ActivatedRoute, private prodServ: ProductService, private router: Router, private popup: PopUpsService, private UserServ: UserService) { }
 
   ngOnInit() {
     this.popup.presentLoading();
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if (this.id) {
       {
-        this.prodServ.get(this.id).subscribe(ans => { this.product = ans });
-        setTimeout(() => { this.popup.dismissLoading() }, 300);//errors occur every time without the timeout
-        //Will leave it here for reference. when deleting an entry errors occur saying that the product.name is undefined, couldn't find a workaround, but it doesn't affect anything other than messages on the console
+        this.getProd();
       }
     } else {
+      setTimeout(() => { this.popup.dismissLoading() }, 300);
       this.router.navigate(["/tabs/products/"]);
     }
+  }
+
+  async getProd(){
+    await this.prodServ.get(this.id).subscribe(async ans => {
+      this.product = ans;
+      await this.UserServ.get(this.product.posterID).subscribe(ans2=>{
+        this.seller = ans2;
+        this.seller.id = this.product.posterID;
+      });
+      setTimeout(() => { this.popup.dismissLoading() }, 300);//errors occur every time without the timeout
+    });
+    //Will leave it here for reference. when deleting an entry errors occur saying that the product.name is undefined, couldn't find a workaround, but it doesn't affect anything other than messages on the console
+  }
+
+  ionViewWillEnter() {
+    this.getUser();
+  }
+
+  async getUser() {
+    await this.UserServ.auth.user.subscribe(ans => {
+      this.UserServ.get(ans.uid).subscribe(ans2 => {
+        this.user = ans2;
+        this.user.id = ans.uid;
+      });
+    });
   }
 
   clickBuy() {
@@ -63,7 +91,7 @@ export class ProductPage implements OnInit {
     });
   }
 
-  ImgOptions(index){
+  ImgOptions(index) {
 
   }
 }

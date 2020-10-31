@@ -1,8 +1,9 @@
 export class Product {
+    posterID: string;
     name: string;
     gallery: string[] = [];
     price: number;
-    category: Categories; //todo change to enum - correction: dont use enum cuz enum on ts/js sucks ass, use something else :)
+    category: Categories; //made it work, good stuff for now.
     description: string;
     specs: string; //todo review. prob chance to an array or something to use as a list
     stock: number;

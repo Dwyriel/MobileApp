@@ -1,29 +1,35 @@
 <pag-header [title]="product.name"></pag-header>
 
 <ion-content [fullscreen]="true">
-  <ion-slides pager="true"  [options]="slideOpts">
+  <ion-slides pager="true" [options]="slideOpts">
     <ion-slide *ngFor="let photo of product.gallery; let i = index">
       <ion-img [src]="photo" (click)="ImgOptions(i)"></ion-img>
     </ion-slide>
   </ion-slides>
+  <h2>{{product.name}}</h2>
   <p>
-    <ion-text>{{product.name}}</ion-text>
+    {{product.price | currency:'BRL'}}
   </p>
-  <p>
-    <ion-text>{{product.price | currency:'BRL'}}</ion-text>
-  </p>
-  <ion-button [disabled]="1 > product.stock" expand="block" size="medium" (click)="clickBuy()" class="ion-margin">Buy</ion-button>
-  <br>Description:
+  <ion-button [disabled]="(1 > product.stock) || (user.id == product.posterID)" expand="block" size="medium"
+    (click)="clickBuy()" class="ion-margin">Buy</ion-button>
+  <h3>Description:</h3>
   <p>
     <ion-text>{{product.description}}</ion-text>
   </p>
-  <br>Specs:
+  <br>
+  <h3>Specs:</h3>
   <p>
     <ion-text>{{product.specs}}</ion-text>
   </p>
+  <ion-row>
+    <h3>Seller:</h3>
+    <h4 routerLink="/tabs/user/{{seller.id}}">&nbsp;&nbsp;{{seller.name}}<span style="color: aqua;"> - View profile</span></h4>
+  </ion-row>
   <!--fix positions later-->
 
   <!--move this somewhere else later, leaving it here just for test purposes-->
-  <ion-button expand="block" size="medium" (click)="EditThisProduct(id)" class="ion-margin">Edit</ion-button>
-  <ion-button expand="block" size="medium" (click)="DeleteThisProduct(id)" class="ion-margin">Delete</ion-button>
+  <ion-button *ngIf="user.id == product.posterID" expand="block" size="medium" (click)="EditThisProduct(id)"
+    class="ion-margin">Edit</ion-button>
+  <ion-button *ngIf="user.id == product.posterID" expand="block" size="medium" (click)="DeleteThisProduct(id)"
+    class="ion-margin">Delete</ion-button>
 </ion-content>

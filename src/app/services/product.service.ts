@@ -13,6 +13,7 @@ export class ProductService {
 
   add(product: Product) {
     return this.fireDB.collection(this.colProduct).add({
+      posterID: product.posterID,
       name: product.name,
       price: product.price,
       gallery: product.gallery,

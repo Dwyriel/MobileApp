@@ -2,9 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Categories, Product } from 'src/app/classes/product';
+import { User } from 'src/app/classes/user';
 import { CameraService } from 'src/app/services/camera.service';
 import { PopUpsService } from 'src/app/services/popups.service';
 import { ProductService } from 'src/app/services/product.service';
+import { UserService } from 'src/app/services/user.service';
 
 export const slideOpts = {
   slidesPerView: 1,
@@ -20,16 +22,41 @@ export const slideOpts = {
 })
 export class ProductFormPage implements OnInit, OnDestroy {
   public product: Product = new Product();
+  private user: User = new User();
   id: string = null;
   public cats = Categories;
   public slideOpts = slideOpts;
 
-  constructor(private productService: ProductService, public alertController: AlertController, private popup: PopUpsService, private activatedRoute: ActivatedRoute, private router: Router, private cameraServ: CameraService) { }
+  constructor(private productService: ProductService, public alertController: AlertController, private popup: PopUpsService,
+    private activatedRoute: ActivatedRoute, private router: Router, private cameraServ: CameraService, private UserServ: UserService) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    this.getUser();
+  }
+
+  async getUser() {
+    await this.UserServ.auth.user.subscribe(ans => {
+      if (!ans.uid)
+        this.router.navigate(["/login"]);
+      this.UserServ.get(ans.uid).subscribe(ans2 => {
+        this.user = ans2;
+        this.user.id = ans.uid;
+        this.getProd();
+      });
+    });
+  }
+
+  async getProd() {
     if (this.id) {
-      this.productService.get(this.id).subscribe(prod => { this.product = prod });
+      this.productService.get(this.id).subscribe(prod => {
+        this.product = prod
+        if (this.user.id != this.product.posterID)
+          this.router.navigate(["/"]);
+      });
     }
   }
 
@@ -41,10 +68,11 @@ export class ProductFormPage implements OnInit, OnDestroy {
   public OnClick(form) {
     if (form.valid) {
       this.popup.presentLoading();
+      this.product.posterID = this.user.id;
       if (!this.id) {
         this.productService.add(this.product).then(ans => {
           form.reset();
-          this.successfulSubmit("Heads up", "Product registered!", "");
+          this.successfulSubmit("Heads up", "Product registered!", "/tabs/products");
         },
           err => {
             this.failedSubmit("Error", "Product not registered!", err);
@@ -86,7 +114,7 @@ export class ProductFormPage implements OnInit, OnDestroy {
     });
   }
 
-  async chancephoto(index) {
+  async chancephoto(index: number) {
     var photo: string;
     await this.cameraServ.alterProdPhoto().then((returnedPhoto) => {
       if (returnedPhoto) {
