@@ -40,10 +40,10 @@ export class ProductPage implements OnInit {
     }
   }
 
-  async getProd(){
+  async getProd() {
     await this.prodServ.get(this.id).subscribe(async ans => {
       this.product = ans;
-      await this.UserServ.get(this.product.posterID).subscribe(ans2=>{
+      await this.UserServ.get(this.product.posterID).subscribe(ans2 => {
         this.seller = ans2;
         this.seller.id = this.product.posterID;
       });
@@ -66,7 +66,11 @@ export class ProductPage implements OnInit {
   }
 
   clickBuy() {
-    this.popup.presentAlert("Hello", "You just bought this overly expensive item");
+    if (!this.user.id) {
+      this.router.navigate(["/login"]);
+    } else {
+      this.popup.presentAlert("Hello", "You just bought this overly expensive item");
+    }
   }
 
   EditThisProduct(id) {
