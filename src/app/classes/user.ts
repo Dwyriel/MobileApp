@@ -1,4 +1,5 @@
 import { Address } from './address';
+import { Cart } from './cart';
 
 export class User {
     id: string;
@@ -9,4 +10,5 @@ export class User {
     address: string;
     photo: string;
     active: boolean = true;
+    cart: Cart;
 }
