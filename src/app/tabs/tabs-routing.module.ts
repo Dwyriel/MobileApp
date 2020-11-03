@@ -60,6 +60,10 @@ const routes: Routes = [
         loadChildren: () => import('../pags/product/product.module').then(m => m.ProductPageModule)
       },
       {
+        path: 'cart',
+        loadChildren: () => import('../pags/cart/cart.module').then( m => m.CartPageModule)
+      },
+      {
         path: 'map',
         loadChildren: () => import('../pags/maps/maps.module').then( m => m.MapsPageModule)
       },

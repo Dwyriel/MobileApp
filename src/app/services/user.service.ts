@@ -3,7 +3,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../classes/user';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Cart } from '../classes/cart';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +18,7 @@ export class UserService {
         name: user.name,
         email: user.email,
         tel: user.tel,
-        active: user.active,
-        cart: user.cart
+        active: user.active
       }).catch(() => {
         this.auth.user.subscribe(ans => ans.delete())
       });
@@ -28,12 +26,9 @@ export class UserService {
   }
 
   getAll() {
-    return this.fireDB.collection<User>(this.colUser).snapshotChanges()
-      .pipe(
-        map(
-          dados => dados.map(d => ({ id: d.payload.doc.id, ...d.payload.doc.data() }))
-        )
-      )
+    return this.fireDB.collection<User>(this.colUser).snapshotChanges().pipe(map(
+      dados => dados.map(d => ({ id: d.payload.doc.id, ...d.payload.doc.data() }))
+    ));
   }
 
   get(id: string) {
@@ -52,8 +47,8 @@ export class UserService {
     return this.fireDB.collection(this.colUser).doc(id).update({ address: address });
   }
 
-  changeCart(id: string, cart: Cart) {
-    return this.fireDB.collection(this.colUser).doc(id).update({ cart: cart });
+  updateCart(id: string, cart: { productID: string, amount: number }[]) {
+    return this.fireDB.collection(this.colUser).doc(id).update({ cart: [...cart] });
   }
 
   delete(id: string) {

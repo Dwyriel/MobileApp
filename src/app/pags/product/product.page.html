@@ -3,7 +3,7 @@
 <ion-content [fullscreen]="true">
   <ion-slides pager="true" [options]="slideOpts">
     <ion-slide *ngFor="let photo of product.gallery; let i = index">
-      <ion-img [src]="photo" (click)="ImgOptions(i)"></ion-img>
+      <ion-img [src]="photo"></ion-img>
     </ion-slide>
   </ion-slides>
   <h2 class="ion-margin">{{product.name}}</h2>

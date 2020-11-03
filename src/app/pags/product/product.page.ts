@@ -5,6 +5,8 @@ import { PopUpsService } from 'src/app/services/popups.service';
 import { ProductService } from 'src/app//services/product.service';
 import { User } from 'src/app/classes/user';
 import { UserService } from 'src/app/services/user.service';
+import { Toast } from '@capacitor/core';
+import { CartService } from 'src/app/services/cart.service';
 
 export const slideOpts = {
   slidesPerView: 1,
@@ -25,7 +27,8 @@ export class ProductPage implements OnInit {
   public product: Product = new Product();
   public slideOpts = slideOpts;
 
-  constructor(private activatedRoute: ActivatedRoute, private prodServ: ProductService, private router: Router, private popup: PopUpsService, private UserServ: UserService) { }
+  constructor(private activatedRoute: ActivatedRoute, private prodServ: ProductService, private router: Router, private popup: PopUpsService,
+    private UserServ: UserService, private cartServ: CartService) { }
 
   ngOnInit() {
     this.popup.presentLoading();
@@ -40,6 +43,10 @@ export class ProductPage implements OnInit {
     }
   }
 
+  ionViewWillEnter() {
+    this.getUser();
+  }
+
   async getProd() {
     await this.prodServ.get(this.id).subscribe(async ans => {
       this.product = ans;
@@ -52,10 +59,6 @@ export class ProductPage implements OnInit {
     //Will leave it here for reference. when deleting an entry errors occur saying that the product.name is undefined, couldn't find a workaround, but it doesn't affect anything other than messages on the console
   }
 
-  ionViewWillEnter() {
-    this.getUser();
-  }
-
   async getUser() {
     await this.UserServ.auth.user.subscribe(ans => {
       this.UserServ.get(ans.uid).subscribe(ans2 => {
@@ -65,11 +68,24 @@ export class ProductPage implements OnInit {
     });
   }
 
-  clickBuy() {
+  async clickBuy() {
     if (!this.user.id) {
       this.router.navigate(["/login"]);
     } else {
-      this.popup.presentAlert("Hello", "You just bought this overly expensive item");
+      await this.popup.presentLoading();
+      if (!this.user.cart)
+        this.user.cart = [];
+      this.cartServ.AddItem(this.id, this.user.cart);
+      await this.UserServ.updateCart(this.user.id, this.user.cart).then(ans => {
+        Toast.show({
+          text: "Added to cart"
+        });
+        setTimeout(() => this.popup.dismissLoading(), 300);
+      }, err => {
+        this.cartServ.RemoveItem(this.id, this.user.cart);
+        this.popup.presentAlert("Oops", "There was a problem adding the item to the cart");
+        setTimeout(() => this.popup.dismissLoading(), 300);
+      });
     }
   }
 
@@ -93,9 +109,5 @@ export class ProductPage implements OnInit {
         )
       }
     });
-  }
-
-  ImgOptions(index) {
-
   }
 }
