@@ -5,7 +5,6 @@ import { PopUpsService } from 'src/app/services/popups.service';
 import { ProductService } from 'src/app//services/product.service';
 import { User } from 'src/app/classes/user';
 import { UserService } from 'src/app/services/user.service';
-import { Toast } from '@capacitor/core';
 import { CartService } from 'src/app/services/cart.service';
 
 export const slideOpts = {
@@ -77,9 +76,7 @@ export class ProductPage implements OnInit {
         this.user.cart = [];
       this.cartServ.AddItem(this.id, this.user.cart);
       await this.UserServ.updateCart(this.user.id, this.user.cart).then(ans => {
-        Toast.show({
-          text: "Added to cart"
-        });
+        this.popup.ShowToast('Added to cart');
         setTimeout(() => this.popup.dismissLoading(), 300);
       }, err => {
         this.cartServ.RemoveItem(this.id, this.user.cart);

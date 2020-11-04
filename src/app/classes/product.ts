@@ -1,4 +1,5 @@
 export class Product {
+    id: string;
     posterID: string;
     name: string;
     gallery: string[] = [];

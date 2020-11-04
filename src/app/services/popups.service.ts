@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { AlertController, LoadingController } from '@ionic/angular';
 import * as ts from "typescript";
 
@@ -7,7 +8,7 @@ import * as ts from "typescript";
 })
 export class PopUpsService {
 
-  constructor(private loadingController: LoadingController, private alertController: AlertController) { }
+  constructor(private loadingController: LoadingController, private alertController: AlertController, private toastctrler: ToastController) { }
 
   async presentLoading() {
     const loading = await this.loadingController.create({
@@ -44,7 +45,7 @@ export class PopUpsService {
         }, {
           text: 'OK',
           handler: () => {
-            alert.dismiss(true);//this is what actually returns what i want, but without the code below it just doesnt work
+            alert.dismiss(true);
             return false;//after some time looking it up, returning false means that the alert wont just "vanish", meaning I can get the date through the dismiss 
           }
         }
@@ -54,8 +55,6 @@ export class PopUpsService {
     await alert.present();
     await alert.onDidDismiss().then((data) => { returned = data; });
     return returned.data;
-    /*this is the worse code I've ever written, i don't even know how I made it work, took way too many hours just to implement this
-    this should be a reminder to not ever do something like this again, and/or look up stuff before commiting to it*/
   }
 
   //runs the code on a string, terrible way to do it, I hate calling and running things through strings. besides, didn't quite work (or maybe I'm just not good enough to make it work)
@@ -81,5 +80,16 @@ export class PopUpsService {
       ]
     });
     await alert.present();
+  }
+
+  async ShowToast(text: string, duration?: number) {
+    const toast = await this.toastctrler.create({
+      message: text,
+      color: "tertiary",
+      duration: (duration) ? duration : 2000,
+      animated: true,
+      mode: "ios"
+    });
+    toast.present();
   }
 }

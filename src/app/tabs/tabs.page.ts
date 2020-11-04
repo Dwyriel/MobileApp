@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../services/product.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-tabs',
@@ -8,10 +8,16 @@ import { ProductService } from '../services/product.service';
 })
 export class TabsPage implements OnInit {
   prodAmount: number;
-  constructor(private prodServ: ProductService) { }
+  constructor(private userServ: UserService) { }
 
   ngOnInit() {
-    this.prodServ.getAll().subscribe(ans => this.prodAmount = ans.length);
+    this.userServ.auth.user.subscribe(ans => {
+      if (ans) {
+        this.userServ.get(ans.uid).subscribe(ans2 => {
+          this.prodAmount = (ans2.cart) ? ans2.cart.length : 0;
+        });
+      }
+    });
   }
 
 }
