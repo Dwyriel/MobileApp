@@ -38,7 +38,7 @@ export class UserProfilePage implements OnInit {
   }
 
   async getUser() {//getting overly complicated, todo divide into multiple methods
-    this.popup.presentLoading();
+    await this.popup.presentLoading();
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if (this.id) {
       this.userServ.get(this.id).subscribe(ans => {
@@ -82,9 +82,9 @@ export class UserProfilePage implements OnInit {
     });
   }
 
-  logout() {
-    this.popup.presentLoading();
-    this.userServ.auth.signOut().then(() => {
+  async logout() {
+    await this.popup.presentLoading();
+    await this.userServ.auth.signOut().then(() => {
       setTimeout(() => this.popup.dismissLoading(), 300);
       this.router.navigate(["/"]);
     });
@@ -93,7 +93,7 @@ export class UserProfilePage implements OnInit {
   async ShowMap() {
     if (!this.showOnMap) {
       var fullAddress = this.address.state + " , " + this.address.city + " , " + this.address.cep + " , " + this.address.street + " , " + this.address.number;
-      this.popup.presentLoading();
+      await this.popup.presentLoading();
       await this.natGeocoder.forwardGeocode(fullAddress, this.options).then((ans: NativeGeocoderResult[]) => {
         this.latitude = parseFloat(ans[0].latitude);
         this.longitude = parseFloat(ans[0].longitude);

@@ -11,7 +11,7 @@
     {{product.price | currency:'BRL'}}
   </p>
   <ion-button [disabled]="(1 > product.stock) || (user.id == product.posterID)" expand="block" size="medium"
-    (click)="clickBuy()" class="ion-margin">Buy</ion-button>
+    (click)="clickBuy()" class="ion-margin">Add to cart</ion-button>
   <h3 class="ion-margin">Description:</h3>
   <p class="ion-margin">
     <ion-text>{{product.description}}</ion-text>

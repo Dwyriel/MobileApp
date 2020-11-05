@@ -46,7 +46,7 @@ export class PopUpsService {
           text: 'OK',
           handler: () => {
             alert.dismiss(true);
-            return false;//after some time looking it up, returning false means that the alert wont just "vanish", meaning I can get the date through the dismiss 
+            return false;//after some time looking it up, returning false means that the alert wont just "vanish", meaning the data can go through the dismiss 
           }
         }
       ]
@@ -57,7 +57,7 @@ export class PopUpsService {
     return returned.data;
   }
 
-  //runs the code on a string, terrible way to do it, I hate calling and running things through strings. besides, didn't quite work (or maybe I'm just not good enough to make it work)
+  //runs the code on a string, terrible way to do it, I hate calling and/or running things through strings. besides, didn't quite work (or maybe I'm just not good enough to make it work)
   async confirmationAlertCode(title: string, description: string, okCode: string) {
     const alert = await this.alertController.create({
       header: title,

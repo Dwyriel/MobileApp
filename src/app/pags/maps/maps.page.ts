@@ -27,7 +27,7 @@ export class MapsPage implements OnInit {
   }
 
   async getLocation() {
-    this.popup.presentLoading();
+    await this.popup.presentLoading();
     const coordinates = await Geolocation.getCurrentPosition();
     this.ngZone.run(() => {
       {

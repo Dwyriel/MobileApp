@@ -44,7 +44,7 @@ export class AddressFormPage implements OnInit {
 
   async OnClick(form) {
     if (form.valid) {
-      this.popup.presentLoading();
+      await this.popup.presentLoading();
       if (!this.id) {
         await this.addressServ.add(this.address).then(ans => {
           this.userServ.addAddress(this.userId, ans.id).then(ans => {

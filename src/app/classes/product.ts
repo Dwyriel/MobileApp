@@ -10,7 +10,7 @@ export class Product {
     stock: number;
 }
 
-export enum Categories {
+export enum Categories {//todo add more later
     Casa,
     Eletronicos,
     Eletrodomesticos,

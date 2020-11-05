@@ -84,4 +84,9 @@ export class CartPage implements OnInit {
       });
     });
   }
+
+  FinishPurchase(){
+    this.popup.presentAlert("Wheee", "The itens you purchased will be shipped in the next 2534 years");
+    //then clear cart etc, etc. 
+  }
 }

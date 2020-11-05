@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -7,29 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class CartService {
   private colCart: string = "Cart";
 
-  constructor(private fireDB: AngularFirestore) { }
-
-  /*add(cart: Cart) {
-    return this.fireDB.collection(this.colCart).add({
-      itens: [...cart.itens]
-    });
-  }
-
-  get(id: string) {
-    return this.fireDB.collection(this.colCart).doc<Cart>(id).valueChanges();
-  }
-
-  updateCart(id: string, cart: Cart) {
-    return this.fireDB.collection(this.colCart).doc(id).update({ itens: [...cart.itens] });
-  }
-
-  update(cart: Cart, id: string) {
-    return this.fireDB.collection(this.colCart).doc(id).update(cart);
-  }
-
-  delete(id: string) {
-    return this.fireDB.collection(this.colCart).doc(id).delete();
-  }*/
+  constructor() { }
 
   AddItem(productID: string, cart: { productID: string, amount: number }[]) {
     if (cart.length < 1)

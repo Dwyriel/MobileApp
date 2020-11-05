@@ -45,11 +45,11 @@ export class UserFormPage implements OnInit {
     });
   }
 
-  OnClick(form) {
+  async OnClick(form) {
     if (form.valid) {
-      this.popup.presentLoading();
+      await this.popup.presentLoading();
       if (!this.id) {
-        this.userService.add(this.user).then(ans => {
+        await this.userService.add(this.user).then(ans => {
           form.reset();
           this.successfulSubmit("Heads up", "User was registered!", "");
         },
@@ -64,7 +64,6 @@ export class UserFormPage implements OnInit {
           this.failedSubmit("Error", "User was not updated!", err);
         });
       }
-      //this.popup.dismissLoading(); could not use only one dismiss, was just giving me errors even being on the same scope, had to leave multiple dismisses throughout the code
     }
   }
 
@@ -73,12 +72,12 @@ export class UserFormPage implements OnInit {
     this.user = new User();
     this.popup.presentAlert(title, description);
     setTimeout(() => this.popup.dismissLoading(), 200);
-    setTimeout(() => this.router.navigate([navigateTo]), 300);//setTimeout seems to have fixed the weird error with dismissLoading, should try to find a better solution later
+    setTimeout(() => this.router.navigate([navigateTo]), 300);
   }
 
   failedSubmit(title: string, description: string, err) {
     console.log(err);
     this.popup.presentAlert(title, description);
-    this.popup.dismissLoading();
+    setTimeout(() => this.popup.dismissLoading(), 200);
   }
 }
