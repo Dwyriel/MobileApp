@@ -1,6 +1,3 @@
-only logged in accounts can list a new product, 
-if a user try to buy but isn't logged in he should be directed to the login page
-
 change layout of stuff
 
 change from ngOnInit to ionViewWillEnter - docs: https://ionicframework.com/docs/angular/lifecycle
