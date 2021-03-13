@@ -37,10 +37,4 @@ export class UserLoginPage implements OnInit {
         this.popup.presentAlert("Error", "Email or password invalid");
       });
   }
-
-  logout() {
-    this.userServ.auth.signOut().then(() => {
-      this.router.navigate(["/"])
-    });
-  }
 }
