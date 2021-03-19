@@ -24,10 +24,6 @@ export class ProductService {
     })
   }
 
-  updatePhoto(id: string, photo: string[]) {
-    return this.fireDB.collection(this.colProduct).doc(id).update({ photo: [...photo] });
-  }
-
   getAll() {
     return this.fireDB.collection<Product>(this.colProduct).snapshotChanges()
       .pipe(
@@ -41,8 +37,8 @@ export class ProductService {
     return this.fireDB.collection(this.colProduct).doc<Product>(id).valueChanges();
   }
 
-  update(user: Product, id: string) {
-    return this.fireDB.collection(this.colProduct).doc(id).update(user);
+  update(product: Product, id: string) {
+    return this.fireDB.collection(this.colProduct).doc(id).update(product);
   }
 
   delete(id: string) {
